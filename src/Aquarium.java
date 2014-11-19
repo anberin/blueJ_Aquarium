@@ -1,94 +1,102 @@
 import java.io.*;
-class Aquarium
-{
-    public static void main ( String[] args )
-    {
-        int numberOfFish=50, randomAge, randomType,randomAlive,randomColor;
+import java.util.Calendar;
+import java.text.SimpleDateFormat;
+
+class Aquarium {
+    public static final String DATE_FORMAT_NOW = "yyyy-MM-dd(HH-mm)";
+    public static String now() {
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW);
+        return sdf.format(cal.getTime());
+    }
+    public static void main(String[] args) {
+        int numberOfFish = 50, randomAge, randomType, randomAlive, randomColor;
         String fishType;
-        String fileName = "output.txt" ;
+        String fileName;
         char fishColor;
-        boolean fishAlive=false;
+        boolean fishAlive = false;
         PrintWriter print = null;
+        fileName = now()+"output.txt";
+        Fish[] tank = new Fish[numberOfFish];
 
-        Fish [] tank= new Fish [numberOfFish];  //array of fish
+        for (int i = 0; i < numberOfFish; i++) {
+            randomType = (int) (Math.random() * 5) + 1;
+            if (randomType == 1) fishType = "minnow";
+            if (randomType == 2) fishType = "bass";
+            if (randomType == 3) fishType = "gold";
+            if (randomType == 4) fishType = "beta";
+            else fishType = "pike";
 
+            randomAge = (int) (Math.random() * 10) + 0;
+            randomAlive = (int) (Math.random() * 2) + 1;
+            if (randomAlive == 1) fishAlive = true;
 
-        //fish tank gets filled up
-        for(int i = 0; i < numberOfFish; i++)
-        {
-            randomType = (int)(Math.random()*2) + 1;
-            if (randomType == 1)  fishType="minnow";
-            else fishType="pike";
+            randomColor = (int) (Math.random() * 6) + 1;
+            if (randomColor == 1) fishColor = 'r';
+            else if (randomColor == 2) fishColor = 'b';
+            else if (randomColor == 3) fishColor = 'p';
+            else if (randomColor == 4) fishColor = 'y';
+            else if (randomColor == 5) fishColor = 'o';
+            else fishColor = 'g';
 
-            randomAge = (int)(Math.random()*10) + 0;
-            randomAlive = (int)(Math.random()*2) + 1;
-            if (randomAlive==1)  fishAlive=true;
-
-            randomColor = (int)(Math.random()*3) + 1;
-            if (randomColor==1)  fishColor='r';
-            else if (randomColor==2)  fishColor='b';
-            else  fishColor= 'g';
-
-            tank[i]=new Fish (fishType,randomAge, fishAlive, fishColor);   //each loop adds a new fish
+            tank[i] = new Fish(fishType, randomAge, fishAlive, fishColor);
         }
 
-        try
-        {
-            print = new PrintWriter( new BufferedWriter( new FileWriter( fileName,true  ) ) );
-        }
-        catch ( IOException iox )
-        {
-            System.out.println("Problem writing " + fileName );
+        try {
+            print = new PrintWriter(new BufferedWriter(new FileWriter("output/"+fileName, true)));
+        } catch (IOException iox) {
+            System.out.println("Problem writing " + fileName);
         }
 
-
-
-        //this for loop just prints out the fish to the text file named output.txt
-        for(int i = 0; i < numberOfFish; i++)
-        { print.println( tank[i].getType() + "\t"  + tank[i].getAge()+ "\t"+ tank[i].isAlive() +"\t"+ tank[i].getColor() );
+        for (int i = 0; i < numberOfFish; i++) {
+            print.println(tank[i].getType() + "\t" + tank[i].getAge() + "\t" + tank[i].isAlive() + "\t" + tank[i].getColor());
         }
         print.close();
     }
 }
 
-
-class Fish
-{
-    // data members
+class Fish {
     private String type;
     private int age;
     private boolean alive;
     private char color;
 
-
-
-    public Fish( String type, int age, boolean alive, char color )
-    {
-        setType( type );
-        setAge( age );
-        setAlive( alive );
-        setColor( color );
+    public Fish(String type, int age, boolean alive, char color) {
+        setType(type);
+        setAge(age);
+        setAlive(alive);
+        setColor(color);
     }
-    // _________methods
-    public void setType( String type )
-    {
+
+    public void setType(String type) {
         this.type = type;
     }
-    public void setAge( int age )
-    {
+
+    public void setAge(int age) {
         this.age = age;
     }
-    public void setAlive( boolean alive )
-    {
+
+    public void setAlive(boolean alive) {
         this.alive = alive;
     }
-    public void setColor( char color )
-    {
+
+    public void setColor(char color) {
         this.color = color;
     }
-    // ________ methods
-    public String getType() { return this.type; }
-    public int getAge() { return this.age; }
-    public boolean isAlive()  { return this.alive; }
-    public char getColor() { return this.color; }
+
+    public String getType() {
+        return this.type;
+    }
+
+    public int getAge() {
+        return this.age;
+    }
+
+    public boolean isAlive() {
+        return this.alive;
+    }
+
+    public char getColor() {
+        return this.color;
+    }
 }
