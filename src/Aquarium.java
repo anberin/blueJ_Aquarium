@@ -42,6 +42,8 @@ class Aquarium {
             tank[i] = new Fish(fishType, randomAge, fishAlive, fishColor);
         }
 
+
+
         try {
             print = new PrintWriter(new BufferedWriter(new FileWriter("output/"+fileName, true)));
         } catch (IOException iox) {
@@ -51,6 +53,7 @@ class Aquarium {
         for (int i = 0; i < numberOfFish; i++) {
             print.println(tank[i].getType() + "\t" + tank[i].getAge() + "\t" + tank[i].isAlive() + "\t" + tank[i].getColor());
         }
+        print.println();
         print.close();
     }
 }
@@ -99,4 +102,35 @@ class Fish {
     public char getColor() {
         return this.color;
     }
+
+    public void bubbleSort(int[] arr) {
+        boolean swapped = true;
+        int j = 0;
+        int tmp;
+        while (swapped) {
+            swapped = false;
+            j++;
+            for (int i = 0; i < arr.length - j; i++) {
+                if (arr[i] > arr[i + 1]) {
+                    tmp = arr[i];
+                    arr[i] = arr[i + 1];
+                    arr[i + 1] = tmp;
+                    swapped = true;
+                }
+            }
+        }
+    }
+
+    public static double calcAverage(int[] people) {
+        double sum = 0;
+        for (int i=0; i < people.length; i++) {
+            sum = sum + people[i];
+        }
+        double result = sum / people.length;
+        System.out.println(result);
+        return result;
+    }
+
+//    int[] myPeople = {1,2,3,4,5,6,7,8};
+//    double myPeopleAverage = calcAverage(myPeople);
 }
