@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="blueJ_Aquarium:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/blueJ_Aquarium_jar</output-path>
+    <root id="archive" name="blueJ_Aquarium.jar">
+      <element id="module-output" name="blueJ_Aquarium" />
+    </root>
+  </artifact>
+</component>
