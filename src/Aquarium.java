@@ -25,6 +25,8 @@ class Aquarium {
         fileName = now() + "output.txt";
         Fish[] tank = new Fish[numberOfFish];
 
+        int[] ages = new int[numberOfFish];
+
         for (int i = 0; i < numberOfFish; i++) {
             randomType = (int) (Math.random() * 5) + 1;
             if (randomType == 1) {
@@ -55,6 +57,7 @@ class Aquarium {
                 fishColor = 'g';
             }
             tank[i] = new Fish(fishType, randomAge, fishAlive, fishColor);
+            ages[i] = randomAge;
         }
 
         try {
@@ -81,9 +84,12 @@ class Aquarium {
         }
 
         print.println("==========================================================");
-        
+        int ageSum = 0;
+        for (int d : ages) ageSum += d;
+        double averageAge = 1.0d * ageSum / ages.length;
+
         print.println("#Statistics#");
-        print.println("Average Population Age: ");
+        print.println("Average Population Age: " + averageAge);
         print.println("Number of Minnows: ");
         print.println("Number of Bass: ");
         print.println("Number of Goldfish: ");
