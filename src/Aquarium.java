@@ -13,9 +13,13 @@ class Aquarium {
         return sdf.format(cal.getTime());
     }
 
-    public static void main(String[] args) {
+    static void makeFolder() {
         File dir = new File("output");
         dir.mkdir();
+    }
+
+    public static void main(String[] args) {
+        makeFolder();
         int numberOfFish = 50, randomAge, randomType, randomColor;
         String fishType;
         String fileName;
@@ -24,7 +28,6 @@ class Aquarium {
         PrintWriter print = null;
         fileName = now() + "output.txt";
         Fish[] tank = new Fish[numberOfFish];
-
         int[] ages = new int[numberOfFish];
         String[] types = new String[numberOfFish];
 
@@ -71,9 +74,30 @@ class Aquarium {
         print.println("#Fish Population in Order of Generation#");
         print.println("Fish Type" + "\t\t" + "Fish Age" + "\t\t" + "Fish Alive?" + "\t\t" + "Fish Color");
         print.println("=========" + "\t\t" + "========" + "\t\t" + "===========" + "\t\t" + "==========");
-        for (int i = 0; i < numberOfFish; i++) {
+        for (int i = 0; i < numberOfFish; i++)
             print.println(tank[i].getType() + "\t\t\t" + tank[i].getAge() + "\t\t\t\t" + tank[i].isAlive() + "\t\t\t" + tank[i].getColor());
-        }
+
+        print.println("==========================================================");
+        Arrays.sort(tank);
+
+        print.println("#Fish Population in Order of Type#");
+        print.println("Fish Type" + "\t\t" + "Fish Age" + "\t\t" + "Fish Alive?" + "\t\t" + "Fish Color");
+        print.println("=========" + "\t\t" + "========" + "\t\t" + "===========" + "\t\t" + "==========");
+        for (int i = 0; i < numberOfFish; i++)
+            if (tank[i].getType().equals("minnow"))
+                print.println(tank[i].getType() + "\t\t\t" + tank[i].getAge() + "\t\t\t\t" + tank[i].isAlive() + "\t\t\t" + tank[i].getColor());
+        for (int i = 0; i < numberOfFish; i++)
+            if (tank[i].getType().equals("bass"))
+                print.println(tank[i].getType() + "\t\t\t" + tank[i].getAge() + "\t\t\t\t" + tank[i].isAlive() + "\t\t\t" + tank[i].getColor());
+        for (int i = 0; i < numberOfFish; i++)
+            if (tank[i].getType().equals("gold"))
+                print.println(tank[i].getType() + "\t\t\t" + tank[i].getAge() + "\t\t\t\t" + tank[i].isAlive() + "\t\t\t" + tank[i].getColor());
+        for (int i = 0; i < numberOfFish; i++)
+            if (tank[i].getType().equals("beta"))
+                print.println(tank[i].getType() + "\t\t\t" + tank[i].getAge() + "\t\t\t\t" + tank[i].isAlive() + "\t\t\t" + tank[i].getColor());
+        for (int i = 0; i < numberOfFish; i++)
+            if (tank[i].getType().equals("pike"))
+                print.println(tank[i].getType() + "\t\t\t" + tank[i].getAge() + "\t\t\t\t" + tank[i].isAlive() + "\t\t\t" + tank[i].getColor());
 
         print.println("==========================================================");
         Arrays.sort(tank);
@@ -87,12 +111,10 @@ class Aquarium {
 
         print.println("==========================================================");
         print.println("#Statistics#");
-
         int ageSum = 0;
         for (int d : ages) ageSum += d;
         double averageAge = 1.0d * ageSum / ages.length;
         print.println("Average Population Age: " + averageAge);
-
         int numOfMinnows = 0;
         int numOfBass = 0;
         int numOfGoldfish = 0;
