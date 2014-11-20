@@ -26,6 +26,7 @@ class Aquarium {
         Fish[] tank = new Fish[numberOfFish];
 
         int[] ages = new int[numberOfFish];
+        String[] types = new String[numberOfFish];
 
         for (int i = 0; i < numberOfFish; i++) {
             randomType = (int) (Math.random() * 5) + 1;
@@ -58,6 +59,7 @@ class Aquarium {
             }
             tank[i] = new Fish(fishType, randomAge, fishAlive, fishColor);
             ages[i] = randomAge;
+            types[i] = fishType;
         }
 
         try {
@@ -84,17 +86,30 @@ class Aquarium {
         }
 
         print.println("==========================================================");
+        print.println("#Statistics#");
+
         int ageSum = 0;
         for (int d : ages) ageSum += d;
         double averageAge = 1.0d * ageSum / ages.length;
-
-        print.println("#Statistics#");
         print.println("Average Population Age: " + averageAge);
-        print.println("Number of Minnows: ");
-        print.println("Number of Bass: ");
-        print.println("Number of Goldfish: ");
-        print.println("Number of Betas: ");
-        print.println("Number of Pike: ");
+
+        int numOfMinnows = 0;
+        int numOfBass = 0;
+        int numOfGoldfish = 0;
+        int numOfBetas = 0;
+        int numOfPike = 0;
+        for (String d : types) {
+            if (d.equals("minnow")) numOfMinnows += 1;
+            if (d.equals("bass")) numOfBass += 1;
+            if (d.equals("gold")) numOfGoldfish += 1;
+            if (d.equals("beta")) numOfBetas += 1;
+            if (d.equals("pike")) numOfPike += 1;
+        }
+        print.println("Number of Minnows: " + numOfMinnows);
+        print.println("Number of Bass: " + numOfBass);
+        print.println("Number of Goldfish: " + numOfGoldfish);
+        print.println("Number of Betas: " + numOfBetas);
+        print.println("Number of Pike: " + numOfPike);
         print.close();
     }
 }
